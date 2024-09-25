@@ -7,7 +7,8 @@ The main goal of this application is to help users track details about completed
 - *distance*
 - *elevation gain* 
 - *difficulty level* (easy, moderate, hard)
-- *date completed*. 
+- *date completed* 
+
 It will also calculate statistics about your hikes, such as the average difficulty level or distance of the hikes you complete. Users will also be able to add notes about their hike. Finally, users will be able to view all the trails logged, and filter (ie. by difficulty, location, or completion status) or sort (ie. by distance) their list!
 
 ## Who will use it?
