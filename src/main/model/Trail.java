@@ -23,6 +23,26 @@ public class Trail {
         dateCompleted = "not completed!";
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public Boolean getCompletionStatus() {
+        return completed;
+    }
+
+    public String getDateCompleted() {
+        return dateCompleted;
+    }
+
     /*
      * MODIFIES: this
      * EFFECTS: sets completion status to completed
