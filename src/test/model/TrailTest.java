@@ -73,4 +73,11 @@ class TrailTest {
         testTrail.setDate("August 21, 2024");
         assertEquals("August 21, 2024", testTrail.getDateCompleted());
     }
+
+    @Test
+    void testResetDate() {
+        testTrail.setDate("May 25, 2024");
+        testTrail.resetDate();
+        assertEquals("not completed", testTrail.getDateCompleted());
+    }
 }

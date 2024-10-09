@@ -70,4 +70,13 @@ public class Trail {
         this.dateCompleted = date;
         return dateCompleted;
     }
+
+    /*
+     * MODIFIES: this
+     * EFFECTS: sets completion date to not completed
+     */
+    public String resetDate() {
+        this.dateCompleted = "not completed";
+        return dateCompleted;
+    }
 }
