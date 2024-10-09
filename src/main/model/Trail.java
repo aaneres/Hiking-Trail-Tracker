@@ -20,7 +20,7 @@ public class Trail {
         this.location = trailLocation;
         this.distance = trailDistance;
         completed = false;
-        dateCompleted = "not completed!";
+        dateCompleted = "not completed";
     }
 
     public String getName() {
