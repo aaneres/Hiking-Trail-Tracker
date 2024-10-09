@@ -4,8 +4,8 @@ package model;
 public class Trail {
     private String name;            // trail name
     private String location;        // location of trail
-    private double distance;           // distance in km
-    private boolean completed;      // whether trail was completed
+    private double distance;        // distance in km
+    private boolean completed;      // returns true if trail is completed
     private String dateCompleted;   // date trail was completed
 
     /*
@@ -73,7 +73,7 @@ public class Trail {
 
     /*
      * MODIFIES: this
-     * EFFECTS: sets completion date to not completed
+     * EFFECTS: resets completion date to not completed
      */
     public String resetDate() {
         this.dateCompleted = "not completed";
