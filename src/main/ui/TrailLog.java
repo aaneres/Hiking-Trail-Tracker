@@ -104,7 +104,9 @@ public class TrailLog {
     }
 
     // MODIFIES: this
-    // EFFECTS: changes a chosen trail's completion status
+    // EFFECTS: changes a chosen trail's completion status and date completed.
+    //          changes status to completed + sets date if trail is currently not completed
+    //          changes status to not complete + resets date if trail is currently completed
     private void changeTrailCompletion() {
         System.out.println("Enter the name of the trail you want to change the completion status of:");
         String name = input.next();
