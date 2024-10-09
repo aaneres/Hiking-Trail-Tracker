@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-// Collection of Trails
+// User interface for representing a log of Trails 
 public class TrailLog {
     private Trail currentTrail;
     private List<Trail> trails;
     private Scanner input;
 
-    // EFFECTS: runs the trail log
+    // EFFECTS: runs the TrailLog application
     public TrailLog() {
         runTrailLog();
     }
@@ -110,7 +110,7 @@ public class TrailLog {
         String name = input.next();
         for (int i = 0; i < trails.size(); i++) {
             if (trails.get(i).getName().equals(name)) {
-                if (trails.get(i).getCompletionStatus().equals(false)){
+                if (trails.get(i).getCompletionStatus().equals(false)) {
                     trails.get(i).markCompleted();
                     System.out.println("Marking trail as completed...");
                     System.out.println("When did you complete this trail?");
@@ -126,7 +126,7 @@ public class TrailLog {
         }
     }
 
-    // EFFECTS: displays all trails in TrailLog
+    // EFFECTS: displays all trails in the list of trails
     private void viewTrails() {
         if (trails.isEmpty()) {
             System.out.println("No trails in the log.");

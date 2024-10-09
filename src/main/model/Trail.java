@@ -13,7 +13,7 @@ public class Trail {
      *           trailDistance is not zero or negative
      * EFFECTS: name is set to trailName; location is set to trailLocation; 
      *          distance is set to trailDistance; completed is set to false;
-     *          dateCompleted is set to "not completed!"
+     *          dateCompleted is set to "not completed"
      */
     public Trail(String trailName, String trailLocation, double trailDistance) {
         this.name = trailName;
