@@ -48,7 +48,7 @@ public class Trail {
      * EFFECTS: sets completion status to completed
      */
     public boolean markCompleted() {
-        // stub
+        this.completed = true;
         return this.completed;
     }
 
@@ -57,7 +57,7 @@ public class Trail {
      * EFFECTS: sets completion status to not completed
      */
     public boolean markNotCompleted() {
-        // stub
+        this.completed = false;
         return this.completed;
     }
 
@@ -67,7 +67,7 @@ public class Trail {
      * EFFECTS: sets completion date to date given
      */
     public String setDate(String date) {
-        // stub
+        this.dateCompleted = date;
         return dateCompleted;
     }
 }
