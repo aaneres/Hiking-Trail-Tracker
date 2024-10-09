@@ -82,7 +82,7 @@ public class TrailLog {
         String name = input.next();
         System.out.println("Enter the location of the trail:");
         String location = input.next();
-        System.out.println("Enter the distance of the trail (in km)");
+        System.out.println("Enter the distance of the trail (in km):");
         double distance = input.nextDouble();
 
         currentTrail = new Trail(name, location, distance);
