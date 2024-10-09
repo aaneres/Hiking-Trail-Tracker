@@ -4,9 +4,7 @@
 The main goal of this application is to help users track details about completed trails. Each trail will be able to be logged with: 
 - *name* 
 - *location* 
-- *distance*
-- *elevation gain* 
-- *difficulty level* (easy, moderate, hard)
+- *distance (km)*
 - *date completed* 
 
 ## Who will use it?
