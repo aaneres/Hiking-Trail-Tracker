@@ -56,7 +56,7 @@ public class TrailLog {
         return null;
     }
 
-    // REQUIRES: a name of non-zero length
+    // REQUIRES: a name of non-zero length, a date of non-zero length
     // MODIFIES: this
     // EFFECTS: changes a Trail in the TrailLog's completion date
     public Boolean logCompletionDate(String name, String date) {
