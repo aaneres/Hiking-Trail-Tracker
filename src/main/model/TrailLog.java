@@ -20,7 +20,7 @@ public class TrailLog {
     // EFFECTS: adds a Trail to the TrailLog
     public void logAdder(String name, String location, double distance) {
         currentTrail = new Trail(name, location, distance);
-        //stub
+        trailList.add(currentTrail);
     }
 
     // REQUIRES: a name of non-zero length
@@ -28,14 +28,44 @@ public class TrailLog {
     // EFFECTS: looks for a Trail in the TrailLog by name (String)
     // returns true if trail is found and removed, false otherwise
     public boolean logRemover(String name) {
-        //stub
+        for (int i = 0; i < trailList.size(); i++) {
+            if (trailList.get(i).getName().equals(name)) {
+                trailList.remove(i);
+                return true;
+            }
+        }
         return false;
     }
 
     // REQUIRES: a name of non-zero length
     // MODIFIES: this
     // EFFECTS: changes a Trail in the TrailLog's completion status
-    public void logCompletionChanger(String name) {
-        //stub
+    public Boolean logCompletionChanger(String name) {
+        for (int i = 0; i < trailList.size(); i++) {
+            if (trailList.get(i).getName().equals(name)) {
+                if (!trailList.get(i).getCompletionStatus()) {
+                    trailList.get(i).markCompleted();
+                    return true;
+                } else {
+                    trailList.get(i).markNotCompleted();
+                    trailList.get(i).resetDate();
+                    return false;
+                }
+            }
+        }
+        return null;
+    }
+
+    // REQUIRES: a name of non-zero length
+    // MODIFIES: this
+    // EFFECTS: changes a Trail in the TrailLog's completion date
+    public Boolean logCompletionDate(String name, String date) {
+        for (int i = 0; i < trailList.size(); i++) {
+            if (trailList.get(i).getName().equals(name)) {
+                trailList.get(i).setDate(date);
+                break;
+            }
+        }
+        return null;
     }
 }

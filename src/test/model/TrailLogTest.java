@@ -130,4 +130,29 @@ class TrailLogTest {
         testTrailLog.logCompletionChanger("Half Dome");
         assertFalse(testTrailLog.getTrailList().get(2).getCompletionStatus());
     }
+
+    @Test
+    void testCompletionChangerFails() {
+        testTrailLog.logAdder("Plain of Six Glaciers", "Banff", 14.6);
+        testTrailLog.logAdder("Stawamus Chief", "Squamish", 5.8);
+        testTrailLog.logAdder("Half Dome", "Yosemite", 26.6);
+        assertNull(testTrailLog.logCompletionChanger("Not In List"));
+    }
+
+    @Test
+    void testCompletionDate() {
+        testTrailLog.logAdder("Plain of Six Glaciers", "Banff", 14.6);
+        testTrailLog.logAdder("Stawamus Chief", "Squamish", 5.8);
+        testTrailLog.logAdder("Half Dome", "Yosemite", 26.6);
+        testTrailLog.logCompletionDate("Half Dome", "May 25");
+        assertEquals("May 25", testTrailLog.getTrailList().get(2).getDateCompleted());
+    }
+
+    @Test
+    void testCompletionDateFails() {
+        testTrailLog.logAdder("Plain of Six Glaciers", "Banff", 14.6);
+        testTrailLog.logAdder("Stawamus Chief", "Squamish", 5.8);
+        testTrailLog.logAdder("Half Dome", "Yosemite", 26.6);
+        assertNull(testTrailLog.logCompletionDate("Not In List", "Not Today"));
+    }
 }

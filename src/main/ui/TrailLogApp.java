@@ -1,16 +1,13 @@
 package ui;
 
 import model.Trail;
+import model.TrailLog;
 
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-
 
 // User interface for representing a log of Trails 
 public class TrailLogApp {
-    private Trail currentTrail;
-    private List<Trail> trails;
+    private TrailLog trailLog;
     private Scanner input;
 
     // EFFECTS: runs the TrailLog application
@@ -60,7 +57,7 @@ public class TrailLogApp {
     // MODIFIES: this
     // EFFECTS: initializes the list of trails and scanner
     private void init() {
-        trails = new ArrayList<>();
+        trailLog = new TrailLog();
         input = new Scanner(System.in);
         input.useDelimiter("\r?\n|\r");
     }
@@ -85,8 +82,8 @@ public class TrailLogApp {
         System.out.println("Enter the distance of the trail (in km):");
         double distance = input.nextDouble();
 
-        currentTrail = new Trail(name, location, distance); //!!
-        trails.add(currentTrail);
+        trailLog.logAdder(name, location, distance);
+
         System.out.println("Trail added!");
     }
 
@@ -95,46 +92,43 @@ public class TrailLogApp {
     private void removeTrail() {
         System.out.println("Enter the name of the trail you want to remove:");
         String name = input.next();
-        for (int i = 0; i < trails.size(); i++) {
-            if (trails.get(i).getName().equals(name)) {
-                trails.remove(i);
-                System.out.println("Trail was successfully removed!");
-            }
+        if (trailLog.logRemover(name)) {
+            System.out.println("Trail was successfully removed!");
+        } else {
+            System.out.println("Trail was not found ):");
         }
+
     }
 
     // MODIFIES: this
     // EFFECTS: changes a chosen trail's completion status and date completed.
-    //          changes status to completed + sets date if trail is currently not completed
-    //          changes status to not complete + resets date if trail is currently completed
+    // changes status to completed + sets date if trail is currently not completed
+    // changes status to not complete + resets date if trail is currently completed
     private void changeTrailCompletion() {
         System.out.println("Enter the name of the trail you want to change the completion status of:");
         String name = input.next();
-        for (int i = 0; i < trails.size(); i++) {
-            if (trails.get(i).getName().equals(name)) {
-                if (trails.get(i).getCompletionStatus().equals(false)) {
-                    trails.get(i).markCompleted();
-                    System.out.println("Marking trail as completed...");
-                    System.out.println("When did you complete this trail?");
-                    String date = input.next();
-                    trails.get(i).setDate(date);
-                    System.out.println("Trail successfully completed, date successfully recorded!");
-                } else {
-                    trails.get(i).markNotCompleted();
-                    trails.get(i).resetDate();
-                    System.out.println("Trail marked not complete!");
-                }
-            }
+
+        Boolean result = trailLog.logCompletionChanger(name);
+        if (result == null) {
+            System.out.println("Trail not found!");
+        } else if (result) {
+            System.out.println("Marking trail as completed...");
+            System.out.println("When did you complete this trail?");
+            String date = input.next();
+            trailLog.logCompletionDate(name, date);
+            System.out.println("Trail successfully completed, date successfully recorded!");
+        } else {
+            System.out.println("Trail marked not complete!");
         }
     }
 
     // EFFECTS: displays all trails in the list of trails
     private void viewTrails() {
-        if (trails.isEmpty()) {
+        if (trailLog.getTrailList().isEmpty()) {
             System.out.println("No trails in the log.");
         } else {
             System.out.println("Trails in your log:");
-            for (Trail trail : trails) {
+            for (Trail trail : trailLog.getTrailList()) {
                 System.out.println("Trail Name: " + trail.getName());
                 System.out.println("Location: " + trail.getLocation());
                 System.out.println("Distance: " + trail.getDistance() + " km");
