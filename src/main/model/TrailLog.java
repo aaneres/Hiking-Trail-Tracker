@@ -40,7 +40,8 @@ public class TrailLog {
 
     // REQUIRES: a name of non-zero length
     // MODIFIES: this
-    // EFFECTS: changes a Trail in the TrailLog's completion status
+    // EFFECTS: changes a Trail in the TrailLog's completion status; returns null if not found
+    // returns true if trail is marked completed; returns false if marked not complete
     public Boolean logCompletionChanger(String name) {
         for (int i = 0; i < trailList.size(); i++) {
             if (trailList.get(i).getName().equals(name)) {
@@ -59,7 +60,7 @@ public class TrailLog {
 
     // REQUIRES: a name of non-zero length, a date of non-zero length
     // MODIFIES: this
-    // EFFECTS: changes a Trail in the TrailLog's completion date
+    // EFFECTS: changes a Trail in the TrailLog's completion date; returns null if not found
     public Boolean logCompletionDate(String name, String date) {
         for (int i = 0; i < trailList.size(); i++) {
             if (trailList.get(i).getName().equals(name)) {
