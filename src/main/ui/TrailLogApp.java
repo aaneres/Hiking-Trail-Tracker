@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 
 // User interface for representing a log of Trails 
-public class TrailLog {
+public class TrailLogApp {
     private Trail currentTrail;
     private List<Trail> trails;
     private Scanner input;
 
     // EFFECTS: runs the TrailLog application
-    public TrailLog() {
+    public TrailLogApp() {
         runTrailLog();
     }
 
