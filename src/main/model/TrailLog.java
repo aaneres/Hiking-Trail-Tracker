@@ -7,6 +7,7 @@ public class TrailLog {
     private Trail currentTrail;
     private ArrayList<Trail> trailList; // List of trails
 
+    // EFFECTS: trailList is set to a new empty ArrayList.
     public TrailLog() {
         this.trailList = new ArrayList<>();
     }
