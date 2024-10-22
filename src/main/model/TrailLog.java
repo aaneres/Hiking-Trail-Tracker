@@ -16,6 +16,11 @@ public class TrailLog {
         return trailList;
     }
 
+    // EFFECTS: returns number of trails in this trailList
+    public int numTrails() {
+        return trailList.size();
+    }
+
     // REQUIRES: a name and location that are not length zero; a non-zero/positive distance
     // MODIFIES: this
     // EFFECTS: adds a Trail to the TrailLog
