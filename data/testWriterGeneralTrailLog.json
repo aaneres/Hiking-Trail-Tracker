@@ -1,0 +1,16 @@
+{"trailList": [
+    {
+        "distance": 1.9,
+        "dateCompleted": "not completed",
+        "name": "Grouse Grind",
+        "location": "Grouse",
+        "completed": false
+    },
+    {
+        "distance": 22.4,
+        "dateCompleted": "Oct 21, 2023",
+        "name": "Brew Hut",
+        "location": "Mount Brew",
+        "completed": true
+    }
+]}

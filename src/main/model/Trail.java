@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a trail having a name, location, distance, completion and completion date
-public class Trail {
+public class Trail implements Writable {
     private String name;            // trail name
     private String location;        // location of trail
     private double distance;        // distance in km
@@ -86,5 +90,18 @@ public class Trail {
     public String resetDate() {
         this.dateCompleted = "not completed";
         return dateCompleted;
+    }
+
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("location", location);
+        json.put("distance", distance);
+        json.put("completed", completed);
+        json.put("dateCompleted", dateCompleted);
+        return json;
     }
 }

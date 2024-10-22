@@ -2,8 +2,13 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a log of trails that individual Trails are added to.
-public class TrailLog {
+public class TrailLog implements Writable {
     private Trail currentTrail;
     private ArrayList<Trail> trailList; // List of trails
 
@@ -21,7 +26,8 @@ public class TrailLog {
         return trailList.size();
     }
 
-    // REQUIRES: a name and location that are not length zero; a non-zero/positive distance
+    // REQUIRES: a name and location that are not length zero; a non-zero/positive
+    // distance
     // MODIFIES: this
     // EFFECTS: adds a Trail to the TrailLog
     public void logAdder(String name, String location, double distance) {
@@ -29,7 +35,8 @@ public class TrailLog {
         trailList.add(currentTrail);
     }
 
-    // REQUIRES: a name and location that are not length zero; a non-zero/positive distance
+    // REQUIRES: a name and location that are not length zero; a non-zero/positive
+    // distance
     // MODIFIES: this
     // EFFECTS: adds a Trail to the TrailLog
     public void logAdder(String name, String location, double distance, boolean completed, String dateCompleted) {
@@ -53,8 +60,10 @@ public class TrailLog {
 
     // REQUIRES: a name of non-zero length
     // MODIFIES: this
-    // EFFECTS: changes a Trail in the TrailLog's completion status; returns null if not found
-    // returns true if trail is marked completed; returns false if marked not complete
+    // EFFECTS: changes a Trail in the TrailLog's completion status; returns null if
+    // not found
+    // returns true if trail is marked completed; returns false if marked not
+    // complete
     public Boolean logCompletionChanger(String name) {
         for (int i = 0; i < trailList.size(); i++) {
             if (trailList.get(i).getName().equals(name)) {
@@ -73,7 +82,8 @@ public class TrailLog {
 
     // REQUIRES: a name of non-zero length, a date of non-zero length
     // MODIFIES: this
-    // EFFECTS: changes a Trail in the TrailLog's completion date; returns null if not found
+    // EFFECTS: changes a Trail in the TrailLog's completion date; returns null if
+    // not found
     public Boolean logCompletionDate(String name, String date) {
         for (int i = 0; i < trailList.size(); i++) {
             if (trailList.get(i).getName().equals(name)) {
@@ -82,5 +92,28 @@ public class TrailLog {
             }
         }
         return null;
+    }
+
+
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("trailList", trailListToJson());
+        return json;
+    }
+
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray trailListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Trail t : trailList) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }
