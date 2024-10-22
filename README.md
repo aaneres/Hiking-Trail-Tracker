@@ -19,3 +19,5 @@ Ever since I was young, I have been hiking with my parents. Almost every time we
 - As a user, I want to be able to view a list of all the trails I have added to my trail log, showing their trail name, location, distance, completion status, and completion date.
 - As a user, I want to be able to mark a trail as completed and record the date I completed it, so I can keep track of the trails I’ve hiked.
 - As a user, I want to be able to remove trails from my log.
+- As a user, I want to be able to save my trail log to file if I want to
+- As a user, I want to be able to be able to load my trail log from file if I want to
