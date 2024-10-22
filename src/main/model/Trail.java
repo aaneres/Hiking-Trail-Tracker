@@ -19,20 +19,20 @@ public class Trail implements Writable {
      *          distance is set to trailDistance; completed is set to false;
      *          dateCompleted is set to "not completed"
      */
-    public Trail(String trailName, String trailLocation, double trailDistance) {
-        this.name = trailName;
-        this.location = trailLocation;
-        this.distance = trailDistance;
-        completed = false;
-        dateCompleted = "not completed";
+    public Trail(String name, String location, double distance) {
+        this.name = name;
+        this.location = location;
+        this.distance = distance;
+        this.completed = false;
+        this.dateCompleted = "not completed";
     }
 
-    public Trail(String trailName, String trailLocation, double trailDistance, boolean completed, String dateCompleted) {
-        this.name = trailName;
-        this.location = trailLocation;
-        this.distance = trailDistance;
-        this.completed = completed;
-        this.dateCompleted = dateCompleted;
+    public Trail(String name, String location, double distance, boolean cd, String date) {
+        this.name = name;
+        this.location = location;
+        this.distance = distance;
+        this.completed = cd;
+        this.dateCompleted = date;
     }
 
     public String getName() {

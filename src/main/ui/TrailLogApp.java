@@ -2,26 +2,37 @@ package ui;
 
 import model.Trail;
 import model.TrailLog;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // User interface for representing a log of Trails 
 public class TrailLogApp {
+    private static final String JSON_STORE = "./data/traillog.json";
     private TrailLog trailLog;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
-    // EFFECTS: runs the TrailLog application
-    public TrailLogApp() {
+    // EFFECTS: constructs TrailLog and runs the TrailLog application
+    // throws FileNotFoundException if storage file is not found
+    public TrailLogApp() throws FileNotFoundException {
+        trailLog = new TrailLog();
+        input = new Scanner(System.in);
+        input.useDelimiter("\r?\n|\r");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runTrailLog();
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    private void runTrailLog() {
+    private void runTrailLog() throws FileNotFoundException {
         boolean keepGoing = true;
         String command = null;
-
-        init();
 
         while (keepGoing) {
             displayMenu();
@@ -38,6 +49,18 @@ public class TrailLogApp {
         System.out.println("\nGoodbye!");
     }
 
+    // EFFECTS: displays menu of options to user
+    private void displayMenu() {
+        System.out.println("\nSelect from:");
+        System.out.println("\ta -> add new trail");
+        System.out.println("\tr -> remove a trail");
+        System.out.println("\tc -> change a trail's completion status");
+        System.out.println("\tv -> view all trails");
+        System.out.println("\ts -> save trail log to file");
+        System.out.println("\tl -> load trail log from file");
+        System.out.println("\tq -> quit");
+    }
+
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
@@ -49,27 +72,13 @@ public class TrailLogApp {
             changeTrailCompletion();
         } else if (command.equals("v")) {
             viewTrails();
+        } else if (command.equals("s")) {
+            saveTrailLog();
+        } else if (command.equals("l")) {
+            loadTrailLog();
         } else {
             System.out.println("Selection not valid...");
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: initializes the list of trails and scanner
-    private void init() {
-        trailLog = new TrailLog();
-        input = new Scanner(System.in);
-        input.useDelimiter("\r?\n|\r");
-    }
-
-    // EFFECTS: displays menu of options to user
-    private void displayMenu() {
-        System.out.println("\nSelect from:");
-        System.out.println("\ta -> add new trail");
-        System.out.println("\tr -> remove a trail");
-        System.out.println("\tc -> change a trail's completion status");
-        System.out.println("\tv -> view all trails");
-        System.out.println("\tq -> quit");
     }
 
     // MODIFIES: this
@@ -136,6 +145,33 @@ public class TrailLogApp {
                 System.out.println("Date Completed: " + trail.getDateCompleted());
                 System.out.println();
             }
+        }
+    }
+
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: saves the workroom to file
+    private void saveTrailLog() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(trailLog);
+            jsonWriter.close();
+            System.out.println("Saved your trail log to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // Referenced from the JsonSerialization Demo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadTrailLog() {
+        try {
+            trailLog = jsonReader.read();
+            System.out.println("Loaded trail log from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

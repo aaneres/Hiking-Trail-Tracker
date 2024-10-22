@@ -1,6 +1,5 @@
 package persistence;
 
-import model.Trail;
 import model.TrailLog;
 
 import java.io.IOException;
