@@ -97,6 +97,7 @@ public class TrailLog implements Writable {
 
     // Referenced from the JsonSerialization Demo
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: returns a new JSONObject with the TrailLog's information
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -106,7 +107,7 @@ public class TrailLog implements Writable {
 
     // Referenced from the JsonSerialization Demo
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-    // EFFECTS: returns things in this workroom as a JSON array
+    // EFFECTS: returns things in this TrailLog as a JSON array
     private JSONArray trailListToJson() {
         JSONArray jsonArray = new JSONArray();
 

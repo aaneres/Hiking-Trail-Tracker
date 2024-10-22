@@ -13,11 +13,11 @@ public class Trail implements Writable {
     private String dateCompleted;   // date trail was completed
 
     /*
-     * REQUIRES: trailName and trailLocation have a non-zero length
-     *           trailDistance is not zero or negative
-     * EFFECTS: name is set to trailName; location is set to trailLocation; 
-     *          distance is set to trailDistance; completed is set to false;
-     *          dateCompleted is set to "not completed"
+     * REQUIRES: name and location have a non-zero length
+     *           distance is not zero or negative
+     * EFFECTS: this.name is set to name; this.location is set to location; 
+     *          this.distance is set to distance; this.completed is set to false;
+     *          this.dateCompleted is set to "not completed"
      */
     public Trail(String name, String location, double distance) {
         this.name = name;
@@ -27,6 +27,13 @@ public class Trail implements Writable {
         this.dateCompleted = "not completed";
     }
 
+    /*
+     * REQUIRES: name and location have a non-zero length
+     *           distance is not zero or negative
+     * EFFECTS: this.name is set to name; this.location is set to location; 
+     *          this.distance is set to distance; this.completed is set to cd;
+     *          this.dateCompleted is set to date
+     */
     public Trail(String name, String location, double distance, boolean cd, String date) {
         this.name = name;
         this.location = location;
@@ -94,6 +101,7 @@ public class Trail implements Writable {
 
     // Referenced from the JsonSerialization Demo
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // EFFECTS: returns a new JSONObject with the Trail's information
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

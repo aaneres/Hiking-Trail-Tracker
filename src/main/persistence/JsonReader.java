@@ -13,7 +13,7 @@ import org.json.*;
 // Referenced from the JsonSerialization Demo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads TrailLog from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -22,7 +22,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads traillog from file and returns it;
+    // EFFECTS: reads TrailLog from file and returns it;
     // throws IOException if an error occurs reading data from file
     public TrailLog read() throws IOException {
         String jsonData = readFile(source);
@@ -41,7 +41,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses traillog from JSON object and returns it
+    // EFFECTS: parses TrailLog from JSON object and returns it
     private TrailLog parseTrailLog(JSONObject jsonObject) {
         TrailLog tl = new TrailLog();
         addTrails(tl, jsonObject);
@@ -49,7 +49,7 @@ public class JsonReader {
     }
 
     // MODIFIES: tl
-    // EFFECTS: parses trails from JSON object and adds them to traillog
+    // EFFECTS: parses Trails from JSON object and adds them to TrailLog
     private void addTrails(TrailLog tl, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("trailList");
         for (Object json : jsonArray) {
@@ -59,7 +59,7 @@ public class JsonReader {
     }
 
     // MODIFIES: tl
-    // EFFECTS: parses trail from JSON object and adds it to traillog
+    // EFFECTS: parses Trail from JSON object and adds it to TrailLog
     private void addTrail(TrailLog tl, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         String location = jsonObject.getString("location");

@@ -18,7 +18,8 @@ public class TrailLogApp {
     private JsonReader jsonReader;
 
     // EFFECTS: constructs TrailLog and runs the TrailLog application
-    // throws FileNotFoundException if storage file is not found
+    //          throws FileNotFoundException if destination file cannot 
+    //          be opened for writing
     public TrailLogApp() throws FileNotFoundException {
         trailLog = new TrailLog();
         input = new Scanner(System.in);
@@ -150,7 +151,8 @@ public class TrailLogApp {
 
     // Referenced from the JsonSerialization Demo
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the TrailLog to file
+    //          catches FileNotFoundException if destination file cannot be written in
     private void saveTrailLog() {
         try {
             jsonWriter.open();
@@ -166,6 +168,7 @@ public class TrailLogApp {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // MODIFIES: this
     // EFFECTS: loads workroom from file
+    //          catches IOException if destination file cannot be read
     private void loadTrailLog() {
         try {
             trailLog = jsonReader.read();

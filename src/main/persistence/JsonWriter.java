@@ -9,7 +9,7 @@ import java.io.*;
 // Referenced from the JsonSerialization Demo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
-// Represents a writer that writes JSON representation of traillog to file
+// Represents a writer that writes JSON representation of TrailLog to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -28,7 +28,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of traillog to file
+    // EFFECTS: writes JSON representation of TrailLog to file
     public void write(TrailLog tl) {
         JSONObject json = tl.toJson();
         saveToFile(json.toString(TAB));
