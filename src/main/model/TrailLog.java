@@ -29,6 +29,14 @@ public class TrailLog {
         trailList.add(currentTrail);
     }
 
+    // REQUIRES: a name and location that are not length zero; a non-zero/positive distance
+    // MODIFIES: this
+    // EFFECTS: adds a Trail to the TrailLog
+    public void logAdder(String name, String location, double distance, boolean completed, String dateCompleted) {
+        currentTrail = new Trail(name, location, distance, completed, dateCompleted);
+        trailList.add(currentTrail);
+    }
+
     // REQUIRES: a name of non-zero length
     // MODIFIES: this
     // EFFECTS: looks for a Trail in the TrailLog by name (String)

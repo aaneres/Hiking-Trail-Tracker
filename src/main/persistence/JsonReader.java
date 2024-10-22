@@ -1,5 +1,6 @@
 package persistence;
 
+import model.Trail;
 import model.TrailLog;
 
 import java.io.IOException;
@@ -23,30 +24,47 @@ public class JsonReader {
     // EFFECTS: reads traillog from file and returns it;
     // throws IOException if an error occurs reading data from file
     public TrailLog read() throws IOException {
-        TrailLog tl = new TrailLog();
-        return tl;
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseTrailLog(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
-        return source;
+        StringBuilder contentBuilder = new StringBuilder();
+
+        try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
+            stream.forEach(s -> contentBuilder.append(s));
+        }
+
+        return contentBuilder.toString();
     }
 
     // EFFECTS: parses traillog from JSON object and returns it
-    private TrailLog parseWorkRoom(JSONObject jsonObject) {
+    private TrailLog parseTrailLog(JSONObject jsonObject) {
         TrailLog tl = new TrailLog();
+        addTrails(tl, jsonObject);
         return tl;
     }
 
-    // MODIFIES: wr
+    // MODIFIES: tl
     // EFFECTS: parses trails from JSON object and adds them to traillog
     private void addTrails(TrailLog tl, JSONObject jsonObject) {
-
+        JSONArray jsonArray = jsonObject.getJSONArray("trailList");
+        for (Object json : jsonArray) {
+            JSONObject nextTrail = (JSONObject) json;
+            addTrail(tl, nextTrail);
+        }
     }
 
-    // MODIFIES: wr
+    // MODIFIES: tl
     // EFFECTS: parses trail from JSON object and adds it to traillog
     private void addTrail(TrailLog tl, JSONObject jsonObject) {
-
+        String name = jsonObject.getString("name");
+        String location = jsonObject.getString("location");
+        double distance = jsonObject.getDouble("distance");
+        Boolean completed = jsonObject.getBoolean("completed");
+        String dateCompleted = jsonObject.getString("dateCompleted");
+        tl.logAdder(name, location, distance, completed, dateCompleted);
     }
 }

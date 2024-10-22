@@ -23,6 +23,14 @@ public class Trail {
         dateCompleted = "not completed";
     }
 
+    public Trail(String trailName, String trailLocation, double trailDistance, boolean completed, String dateCompleted) {
+        this.name = trailName;
+        this.location = trailLocation;
+        this.distance = trailDistance;
+        this.completed = completed;
+        this.dateCompleted = dateCompleted;
+    }
+
     public String getName() {
         return name;
     }
