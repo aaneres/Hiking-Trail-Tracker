@@ -5,6 +5,7 @@ import ui.TrailLogGUI;
 import javax.swing.*;
 import java.awt.*;
 
+// Abstract class for Tabs
 public abstract class Tab extends JPanel {
 
     private final TrailLogGUI controller;
