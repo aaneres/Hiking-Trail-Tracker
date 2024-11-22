@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-// 
+// A home tab that where you can choose what to do with your trail log
 public class HomeTab extends Tab {
     private static final String INIT_GREETING = "Welcome to your Trail Log!";
     private JLabel greeting;
@@ -36,6 +36,7 @@ public class HomeTab extends Tab {
         placeSaveButtons();
     }
 
+    // MODIFIES: this
     // EFFECTS: creates greeting at top of console
     private void placeGreeting() {
         greeting = new JLabel(INIT_GREETING, JLabel.CENTER);
@@ -43,95 +44,96 @@ public class HomeTab extends Tab {
         this.add(greeting);
     }
 
+    // MODIFIES: this
     // EFFECTS: creates Add, Remove, Change, and View buttons
     private void placeMainButtons() {
-        JButton addButton = new JButton(ButtonNames.ADD.getValue());
-        JButton removeButton = new JButton(ButtonNames.REMOVE.getValue());
-        JButton changeButton = new JButton(ButtonNames.CHANGE.getValue());
-        JButton viewButton = new JButton(ButtonNames.VIEW.getValue());
-
-        JPanel buttonRow = formatButtonRow(addButton);
-        buttonRow.add(removeButton);
-        buttonRow.add(changeButton);
-        buttonRow.add(viewButton);
+        JPanel buttonRow = formatButtonRow(createMainButton(ButtonNames.ADD));
+        buttonRow.add(createMainButton(ButtonNames.REMOVE));
+        buttonRow.add(createMainButton(ButtonNames.CHANGE));
+        buttonRow.add(createMainButton(ButtonNames.VIEW));
+        buttonRow.add(createMainButton(ButtonNames.CHART));
         buttonRow.setSize(WIDTH, HEIGHT / 6);
-
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String buttonPressed = e.getActionCommand();
-                if (buttonPressed.equals(ButtonNames.ADD.getValue())) {
-                    getController().getTabbedPane().setSelectedIndex(TrailLogGUI.ADD_TAB_INDEX);
-                }
-            }
-        });
-
-        removeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String buttonPressed = e.getActionCommand();
-                if (buttonPressed.equals(ButtonNames.REMOVE.getValue())) {
-                    getController().getTabbedPane().setSelectedIndex(TrailLogGUI.REMOVE_TAB_INDEX);
-                }
-            }
-        });
-
-        changeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String buttonPressed = e.getActionCommand();
-                if (buttonPressed.equals(ButtonNames.CHANGE.getValue())) {
-                    getController().getTabbedPane().setSelectedIndex(TrailLogGUI.CHANGE_TAB_INDEX);
-                }
-            }
-        });
-
-        viewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String buttonPressed = e.getActionCommand();
-                if (buttonPressed.equals(ButtonNames.VIEW.getValue())) {
-                    getController().getTabbedPane().setSelectedIndex(TrailLogGUI.VIEW_TAB_INDEX);
-                }
-            }
-        });
-
         this.add(buttonRow);
     }
 
-    // EFFECTS: creates Save and Load buttons
+    // EFFECTS: Creates a button with given value
+    private JButton createMainButton(ButtonNames buttonName) {
+        JButton button = new JButton(buttonName.getValue());
+        button.addActionListener(e -> switchTab(buttonName));
+        return button;
+    }
+
+    // EFFECTS: Handles each button being pressed and switches tab accordingly
+    private void switchTab(ButtonNames buttonName) {
+        int tabIndex;
+        switch (buttonName) {
+            case ADD:
+                tabIndex = TrailLogGUI.ADD_TAB_INDEX;
+                break;
+            case REMOVE:
+                tabIndex = TrailLogGUI.REMOVE_TAB_INDEX;
+                break;
+            case CHANGE:
+                tabIndex = TrailLogGUI.CHANGE_TAB_INDEX;
+                break;
+            case VIEW:
+                tabIndex = TrailLogGUI.VIEW_TAB_INDEX;
+                break;
+            case CHART:
+                tabIndex = TrailLogGUI.CHART_TAB_INDEX;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + buttonName);
+        }
+        getController().getTabbedPane().setSelectedIndex(tabIndex);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Places Save and Load buttons
     private void placeSaveButtons() {
-        JButton b1 = new JButton(ButtonNames.SAVE.getValue());
-        JButton b2 = new JButton(ButtonNames.LOAD.getValue());
-
-        JPanel buttonRow = formatButtonRow(b1);
-        buttonRow.add(b2);
+        JPanel buttonRow = formatButtonRow(createSaveButton());
+        buttonRow.add(createLoadButton());
         buttonRow.setSize(WIDTH, HEIGHT / 6);
-
-        // Referenced from the JsonSerialization Demo
-        // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-        // EFFECTS: saves the TrailLog to file, catches FileNotFoundException if
-        // destination file cannot be written in
-        b1.addActionListener(e -> {
-            try {
-                jsonWriter.open();
-                jsonWriter.write(getController().getTrailLog());
-                jsonWriter.close();
-                greeting.setText("Saved your trail log to " + JSON_STORE);
-            } catch (FileNotFoundException f) {
-                greeting.setText("Unable to write to file: " + JSON_STORE);
-            }
-        });
-
-        b2.addActionListener(e -> {
-            try {
-                getController().setTrailLog(jsonReader.read());
-                greeting.setText("Loaded trail log from " + JSON_STORE);
-            } catch (IOException f) {
-                greeting.setText("Unable to read from file: " + JSON_STORE);
-            }
-        });
-
         this.add(buttonRow);
     }
+
+    // EFFECTS: creates a button that saves trails in trail log
+    private JButton createSaveButton() {
+        JButton saveButton = new JButton(ButtonNames.SAVE.getValue());
+        saveButton.addActionListener(e -> saveTrailLog());
+        return saveButton;
+    }
+
+    // EFFECTS: creates a button that loads trails from file
+    private JButton createLoadButton() {
+        JButton loadButton = new JButton(ButtonNames.LOAD.getValue());
+        loadButton.addActionListener(e -> loadTrailLog());
+        return loadButton;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: saves the trail log to the storage file
+    private void saveTrailLog() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(getController().getTrailLog());
+            jsonWriter.close();
+            greeting.setText("Saved your trail log to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            greeting.setText("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads the trail log from the storage file
+    private void loadTrailLog() {
+        try {
+            getController().setTrailLog(jsonReader.read());
+            greeting.setText("Loaded trail log from " + JSON_STORE);
+            getController().refreshChartTab();
+        } catch (IOException e) {
+            greeting.setText("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 }

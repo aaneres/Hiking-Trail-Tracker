@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// A tab for adding a new trail to the Trail Log
 public class AddTab extends Tab {
 
     private JTextField nameField;
@@ -20,8 +21,6 @@ public class AddTab extends Tab {
     public AddTab(TrailLogGUI controller) {
         super(controller);
         setLayout(new GridLayout(5, 1));
-
-        // Place input fields and button
         placeForm();
         placeAddButton();
     }
@@ -38,7 +37,6 @@ public class AddTab extends Tab {
         JLabel distanceLabel = new JLabel("Enter the distance of the trail (in km):");
         distanceField = new JTextField();
 
-        // Add components to the tab
         this.add(nameLabel);
         this.add(nameField);
         this.add(locationLabel);
@@ -57,26 +55,21 @@ public class AddTab extends Tab {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    // Read user inputs
                     String name = nameField.getText();
                     String location = locationField.getText();
                     double distance = Double.parseDouble(distanceField.getText());
-
-                    // Add the trail to the trail log
                     TrailLog trailLog = getController().getTrailLog();
+
                     trailLog.logAdder(name, location, distance);
-
-                    // Notify user
                     JOptionPane.showMessageDialog(AddTab.this, "Trail added successfully!");
+                    getController().refreshChartTab();
 
-                    // Clear the input fields
                     nameField.setText("");
                     locationField.setText("");
                     distanceField.setText("");
-
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(AddTab.this, 
-                        "Please enter a valid distance!", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(AddTab.this,
+                            "Please enter a valid distance!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

@@ -6,6 +6,7 @@ public enum ButtonNames {
     REMOVE("Remove trail"),
     CHANGE("Change completion"),
     VIEW("View all trails"),
+    CHART("Pie chart"),
     SAVE("Save"),
     LOAD("Load");
     private final String name;

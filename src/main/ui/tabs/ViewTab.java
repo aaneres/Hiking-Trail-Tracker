@@ -6,10 +6,13 @@ import ui.TrailLogGUI;
 import javax.swing.*;
 import java.awt.*;
 
+// A tab for viewing the trails currently added to Trail Log
 public class ViewTab extends Tab {
 
     private JTextArea trailsTextArea;
 
+    // MODIFIES: this
+    // EFFECTS: Constructs a tab where you can view all the trails in your log
     public ViewTab(TrailLogGUI controller) {
         super(controller);
         setLayout(new BorderLayout());
@@ -26,6 +29,8 @@ public class ViewTab extends Tab {
         add(refreshButton, BorderLayout.SOUTH);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Prints all the trails in the log to the console
     private void displayTrails() {
         StringBuilder sb = new StringBuilder();
         if (getController().getTrailLog().getTrailList().isEmpty()) {

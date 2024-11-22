@@ -21,3 +21,11 @@ Ever since I was young, I have been hiking with my parents. Almost every time we
 - As a user, I want to be able to remove trails from my log.
 - As a user, I want to be able to save my trail log to file if I want to
 - As a user, I want to be able to be able to load my trail log from file if I want to
+
+## Instructions for End User
+
+- You can generate the first required action related to the user story *"adding multiple Xs to a Y"* by clicking either the **"Add trail"** button or the **"Add"** tab on the side, entering valid values for each field, and then clicking the **"Add trail"** button.
+- You can generate the second required action related to the user story *"removing multiple Xs from a Y"* by clicking either the **"Remove trail"** button or the **"Remove"** tab on the side, entering the name of a trail that is already in the Trail Log, and then clicking the **"Remove trail"** button.
+- You can locate my visual component clicking either the **"Pie chart"** button or the **"Stats"** tab on the side. The chart will update automatically whenever you add, change, or remove trails.
+- You can save the state of my application by clicking the **"Save"** button on the home tab.
+- You can reload the state of my application by clicking the **"Load"** button on the home tab.

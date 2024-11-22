@@ -7,7 +7,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// A tab for removing a trail with a given name
 public class RemoveTab extends Tab {
+
+    // EFFECTS: constructs a tab that removes a trail with a given name
     public RemoveTab(TrailLogGUI controller) {
         super(controller);
 
@@ -24,6 +27,7 @@ public class RemoveTab extends Tab {
                 String trailName = trailNameField.getText();
                 if (getController().getTrailLog().logRemover(trailName)) {
                     resultLabel.setText("Trail successfully removed!");
+                    getController().refreshChartTab();
                 } else {
                     resultLabel.setText("Trail not found ):");
                 }
