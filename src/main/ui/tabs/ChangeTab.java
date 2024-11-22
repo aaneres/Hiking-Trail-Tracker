@@ -4,7 +4,6 @@ import ui.ButtonNames;
 import ui.TrailLogGUI;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 // A tab for changing the completion of a trail
 public class ChangeTab extends Tab {
