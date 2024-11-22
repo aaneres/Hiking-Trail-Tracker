@@ -43,6 +43,7 @@ public class TrailLogGUI extends JFrame {
         return trailLog;
     }
 
+    // MODIFIES: this
     // EFFECTS: sets TrailLog object controlled by this UI
     public void setTrailLog(TrailLog trailLog) {
         this.trailLog = trailLog;

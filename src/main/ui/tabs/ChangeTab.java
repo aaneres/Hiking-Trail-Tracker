@@ -8,7 +8,7 @@ import javax.swing.*;
 // A tab for changing the completion of a trail
 public class ChangeTab extends Tab {
 
-    private String currentTrailName; // Holds the current trail being updated
+    private String currentTrailName; 
 
     // EFFECTS: constructs the Change tab for changing completion of trails
     public ChangeTab(TrailLogGUI controller) {
