@@ -71,3 +71,9 @@ Tue Nov 26 09:48:05 PST 2024
 new JSONArray with TrailLog info created
 Tue Nov 26 09:48:05 PST 2024
 new JSONObject with TrailLog info created
+
+## Phase 4: Task 3
+One thing that I would refactor in my design is the ChartTab class. ChartTab currently extends JPanel instead of extending Tab, which is inconsistent with the rest of my project. The other tab classes extend the abstract Tab class which helps with maintainability and consistency in the design. By having ChartTab extend JPanel, I have introduced unnecessary duplication of code that is already handled by the Tab class. 
+
+If I had more time to work on this project, I would refactor ChartTab to extend Tab rather than JPanel. This change would help ChartTab align with the rest of my tab classes, increase the clarity of the design, and make it easier to extend or modify the behaviour of the tabs without needing to introduce seperate logic for each one. Additionally, this refactoring would simplify the relationship between ChartTab and TrailLogGUI, delegating that responsibility to Tab and reducing the complexity of my design.
+

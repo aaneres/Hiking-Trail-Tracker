@@ -25,6 +25,13 @@ public class TrailLogGUI extends JFrame {
     private JTabbedPane sidebar;
     private TrailLog trailLog;
 
+    private HomeTab homeTab;
+    private AddTab addTab;
+    private RemoveTab removeTab;
+    private ChangeTab changeTab;
+    private ViewTab viewTab;
+    private ChartTab chartTab;
+
     // MODIFIES: this
     // EFFECTS: creates TrailLogGUI, displays sidebar and tabs
     public TrailLogGUI() {
@@ -73,12 +80,12 @@ public class TrailLogGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: adds home tab and save tab to this UI
     private void loadTabs() {
-        JPanel homeTab = new HomeTab(this);
-        JPanel addTab = new AddTab(this);
-        JPanel removeTab = new RemoveTab(this);
-        JPanel changeTab = new ChangeTab(this);
-        JPanel viewTab = new ViewTab(this);
-        JPanel chartTab = new ChartTab(this);
+        homeTab = new HomeTab(this);
+        addTab = new AddTab(this);
+        removeTab = new RemoveTab(this);
+        changeTab = new ChangeTab(this);
+        viewTab = new ViewTab(this);
+        chartTab = new ChartTab(this);
 
         sidebar.add(homeTab, HOME_TAB_INDEX);
         sidebar.setTitleAt(HOME_TAB_INDEX, "Home");
