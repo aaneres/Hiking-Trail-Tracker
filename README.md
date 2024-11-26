@@ -31,3 +31,43 @@ Ever since I was young, I have been hiking with my parents. Almost every time we
 - You can locate my visual component clicking either the **"Pie chart"** button or the **"Stats"** tab on the side. The chart will update automatically whenever you add, change, or remove trails.
 - You can save the state of my application by clicking the **"Save"** button on the home tab.
 - You can reload the state of my application by clicking the **"Load"** button on the home tab.
+
+## Phase 4: Task 2
+Tue Nov 26 09:45:51 PST 2024
+Added loaded trail to TrailLog
+Tue Nov 26 09:45:51 PST 2024
+Added loaded trail to TrailLog
+Tue Nov 26 09:46:24 PST 2024
+Added new trail to TrailLog
+Tue Nov 26 09:46:55 PST 2024
+Added new trail to TrailLog
+Tue Nov 26 09:47:10 PST 2024
+Trail set to completed
+Tue Nov 26 09:47:10 PST 2024
+Lost Lake marked completed
+Tue Nov 26 09:47:19 PST 2024
+Trail set to not completed
+Tue Nov 26 09:47:19 PST 2024
+Trail completion date reset
+Tue Nov 26 09:47:19 PST 2024
+Lost Lake marked not completed, date reset
+Tue Nov 26 09:47:29 PST 2024
+Trail set to completed
+Tue Nov 26 09:47:29 PST 2024
+Lost Lake marked completed
+Tue Nov 26 09:47:34 PST 2024
+Trail completion date set
+Tue Nov 26 09:47:34 PST 2024
+Lost Lake date set to August 19, 2023
+Tue Nov 26 09:47:53 PST 2024
+Removed trail named Panorama Ridge
+Tue Nov 26 09:48:05 PST 2024
+new JSONObject with Trail info created
+Tue Nov 26 09:48:05 PST 2024
+new JSONObject with Trail info created
+Tue Nov 26 09:48:05 PST 2024
+new JSONObject with Trail info created
+Tue Nov 26 09:48:05 PST 2024
+new JSONArray with TrailLog info created
+Tue Nov 26 09:48:05 PST 2024
+new JSONObject with TrailLog info created

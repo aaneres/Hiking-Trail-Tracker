@@ -33,6 +33,7 @@ public class TrailLog implements Writable {
     public void logAdder(String name, String location, double distance) {
         currentTrail = new Trail(name, location, distance);
         trailList.add(currentTrail);
+        EventLog.getInstance().logEvent(new Event("Added new trail to TrailLog"));
     }
 
     // REQUIRES: a name and location that are not length zero; a non-zero/positive
@@ -42,6 +43,7 @@ public class TrailLog implements Writable {
     public void logAdder(String name, String location, double distance, boolean completed, String dateCompleted) {
         currentTrail = new Trail(name, location, distance, completed, dateCompleted);
         trailList.add(currentTrail);
+        EventLog.getInstance().logEvent(new Event("Added loaded trail to TrailLog"));
     }
 
     // REQUIRES: a name of non-zero length
@@ -52,6 +54,7 @@ public class TrailLog implements Writable {
         for (int i = 0; i < trailList.size(); i++) {
             if (trailList.get(i).getName().equals(name)) {
                 trailList.remove(i);
+                EventLog.getInstance().logEvent(new Event("Removed trail named " + name));
                 return true;
             }
         }
@@ -69,10 +72,12 @@ public class TrailLog implements Writable {
             if (trailList.get(i).getName().equals(name)) {
                 if (!trailList.get(i).getCompletionStatus()) {
                     trailList.get(i).markCompleted();
+                    EventLog.getInstance().logEvent(new Event(name + " marked completed"));
                     return true;
                 } else {
                     trailList.get(i).markNotCompleted();
                     trailList.get(i).resetDate();
+                    EventLog.getInstance().logEvent(new Event(name + " marked not completed, date reset"));
                     return false;
                 }
             }
@@ -88,6 +93,7 @@ public class TrailLog implements Writable {
         for (int i = 0; i < trailList.size(); i++) {
             if (trailList.get(i).getName().equals(name)) {
                 trailList.get(i).setDate(date);
+                EventLog.getInstance().logEvent(new Event(name + " date set to " + date));
                 break;
             }
         }
@@ -102,6 +108,7 @@ public class TrailLog implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("trailList", trailListToJson());
+        EventLog.getInstance().logEvent(new Event("new JSONObject with TrailLog info created"));
         return json;
     }
 
@@ -115,6 +122,7 @@ public class TrailLog implements Writable {
             jsonArray.put(t.toJson());
         }
 
+        EventLog.getInstance().logEvent(new Event("new JSONArray with TrailLog info created"));
         return jsonArray;
     }
 }

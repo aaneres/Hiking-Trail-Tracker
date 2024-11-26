@@ -1,7 +1,23 @@
-{"trailList": [{
-    "distance": 12,
-    "dateCompleted": "not completed",
-    "name": "hello",
-    "location": "hi",
-    "completed": false
-}]}
+{"trailList": [
+    {
+        "distance": 2.9,
+        "dateCompleted": "August 24, 2023",
+        "name": "Grouse Grind",
+        "location": "Grouse Mountain",
+        "completed": true
+    },
+    {
+        "distance": 77.7,
+        "dateCompleted": "not completed",
+        "name": "West Coast Trail",
+        "location": "Pacific Rim National Park Reserve",
+        "completed": false
+    },
+    {
+        "distance": 4,
+        "dateCompleted": "August 19, 2023",
+        "name": "Lost Lake",
+        "location": "Whistler",
+        "completed": true
+    }
+]}

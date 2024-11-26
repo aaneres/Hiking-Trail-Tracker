@@ -2,6 +2,11 @@ package ui;
 
 import javax.swing.*;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import model.Event;
+import model.EventLog;
 import model.TrailLog;
 import ui.tabs.*;
 
@@ -25,7 +30,7 @@ public class TrailLogGUI extends JFrame {
     public TrailLogGUI() {
         super("TrailLog");
         setSize(WIDTH, HEIGHT);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         trailLog = new TrailLog();
 
@@ -35,7 +40,23 @@ public class TrailLogGUI extends JFrame {
         loadTabs();
         add(sidebar);
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                printEventLog();
+                System.exit(0);
+            }
+        });
+
         setVisible(true);
+    }
+
+    // EFFECTS: prints all logged events to the console
+    private void printEventLog() {
+        EventLog eventLog = EventLog.getInstance();
+        for (Event event : eventLog) {
+            System.out.println(event.toString());
+        }
     }
 
     // EFFECTS: returns TrailLog object controlled by this UI
@@ -81,7 +102,7 @@ public class TrailLogGUI extends JFrame {
         sidebar.setTitleAt(CHART_TAB_INDEX, "Stats");
         sidebar.revalidate();
         sidebar.repaint();
-    }     
+    }
 
     // EFFECTS: returns sidebar of this UI
     public JTabbedPane getTabbedPane() {

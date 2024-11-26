@@ -68,6 +68,7 @@ public class Trail implements Writable {
      */
     public boolean markCompleted() {
         this.completed = true;
+        EventLog.getInstance().logEvent(new Event("Trail set to completed"));
         return this.completed;
     }
 
@@ -77,6 +78,7 @@ public class Trail implements Writable {
      */
     public boolean markNotCompleted() {
         this.completed = false;
+        EventLog.getInstance().logEvent(new Event("Trail set to not completed"));
         return this.completed;
     }
 
@@ -87,6 +89,7 @@ public class Trail implements Writable {
      */
     public String setDate(String date) {
         this.dateCompleted = date;
+        EventLog.getInstance().logEvent(new Event("Trail completion date set"));
         return dateCompleted;
     }
 
@@ -96,6 +99,7 @@ public class Trail implements Writable {
      */
     public String resetDate() {
         this.dateCompleted = "not completed";
+        EventLog.getInstance().logEvent(new Event("Trail completion date reset"));
         return dateCompleted;
     }
 
@@ -110,6 +114,7 @@ public class Trail implements Writable {
         json.put("distance", distance);
         json.put("completed", completed);
         json.put("dateCompleted", dateCompleted);
+        EventLog.getInstance().logEvent(new Event("new JSONObject with Trail info created"));
         return json;
     }
 }
